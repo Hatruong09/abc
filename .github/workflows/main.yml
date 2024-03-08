@@ -36,8 +36,8 @@ jobs:
         
       - name: Setting-up GitHub username
         run: |
-          git config --global user.email "github@actions"
-          git config --global user.name "Repository manager"
+          git config --global user.email "havantruong2509@gmail.com "
+          git config --global user.name "Hatruong09"
           
       - name: Disabling Git pager (e.g. for git log)
         run: git config --global core.pager 'cat'
