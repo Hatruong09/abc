@@ -81,19 +81,3 @@ jobs:
           echo "CHROMIUM_BUILD=${{ github.event.inputs.NEW_CHROMIUM_BUILD }}" >> CHROMIUM_VERSION
           echo "CHROMIUM_PATCH=${{ github.event.inputs.NEW_CHROMIUM_PATCH }}" >> CHROMIUM_VERSION
 
-      - name: Creating pull request
-        id: pullrequest
-        uses: peter-evans/create-pull-request@v3
-        with:
-          branch: chromium_${{ github.event.inputs.NEW_CHROMIUM_MAJOR }}.${{ github.event.inputs.NEW_CHROMIUM_MINOR }}.${{ github.event.inputs.NEW_CHROMIUM_BUILD }}.${{ github.event.inputs.NEW_CHROMIUM_PATCH }}
-          base: chromium
-          delete-branch: true
-          signoff: true
-          title: "Update Chromium version ${{ env.CHROMIUM_MAJOR }}.${{ env.CHROMIUM_MINOR }}.${{ env.CHROMIUM_BUILD }}.${{ env.CHROMIUM_PATCH }} to ${{ github.event.inputs.NEW_CHROMIUM_MAJOR }}.${{ github.event.inputs.NEW_CHROMIUM_MINOR }}.${{ github.event.inputs.NEW_CHROMIUM_BUILD }}.${{ github.event.inputs.NEW_CHROMIUM_PATCH }}"
-          commit-message: "[Chromium] Update version ${{ env.CHROMIUM_MAJOR }}.${{ env.CHROMIUM_MINOR }}.${{ env.CHROMIUM_BUILD }}.${{ env.CHROMIUM_PATCH }} to ${{ github.event.inputs.NEW_CHROMIUM_MAJOR }}.${{ github.event.inputs.NEW_CHROMIUM_MINOR }}.${{ github.event.inputs.NEW_CHROMIUM_BUILD }}.${{ github.event.inputs.NEW_CHROMIUM_PATCH }}"
-          body: Version update initiated by ${{ github.actor }}
-
-      - name: Getting pull request URL
-        run: |
-          echo "Pull request number - ${{ steps.pullrequest.outputs.pull-request-number }}"
-          echo "Pull request URL - ${{ steps.pullrequest.outputs.pull-request-url }}"
